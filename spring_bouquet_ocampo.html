@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Spring Bouquet — Ocampo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    overflow: hidden;
+    position: relative;
+    background: #fffbfe;
+  }
+
+  #fw-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  /* ── TEXT SIDE ── */
+  .text-side {
+    flex: 1;
+    max-width: 560px;
+    min-width: 0;
+  }
+
+  .badge {
+    display: inline-block;
+    background: #fce7f3;
+    color: #9d174d;
+    font-size: clamp(11px, 1.3vw, 13px);
+    font-weight: 600;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: clamp(0.9rem, 2vw, 1.4rem);
+    letter-spacing: 0.06em;
+  }
+
+  .text-side h1 {
+    font-size: clamp(1.9rem, 4vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    color: #6b21a8;
+    margin-bottom: clamp(0.7rem, 1.5vw, 1.1rem);
+  }
+
+  .text-side h1 em { font-style: normal; color: #15803d; }
+
+  .text-side .sub {
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    font-weight: 600;
+    color: #a21caf;
+    margin-bottom: clamp(0.7rem, 1.5vw, 1rem);
+  }
+
+  .text-side .msg {
+    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+    line-height: 1.9;
+    color: #374151;
+    margin-bottom: clamp(1rem, 2vw, 1.6rem);
+  }
+
+  .text-side .msg strong {
+    color: #6b21a8;
+    font-weight: 700;
+  }
+
+  .text-side .msg .highlight {
+    color: #15803d;
+    font-weight: 700;
+  }
+
+  .text-side .msg .sign-off {
+    display: block;
+    margin-top: 0.8rem;
+    font-weight: 700;
+    color: #a21caf;
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  }
+
+  .text-side .quote {
+    font-size: clamp(0.82rem, 1.1vw, 0.96rem);
+    font-style: italic;
+    color: #9ca3af;
+    border-left: 3px solid #f9a8d4;
+    padding-left: 14px;
+    line-height: 1.65;
+    margin-bottom: 0.4rem;
+  }
+
+  .made-by {
+    font-size: clamp(0.7rem, 0.9vw, 0.78rem);
+    color: #c084fc;
+    margin-top: 1rem;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  .dots { display: flex; gap: 8px; margin-top: clamp(1.2rem, 2vw, 2rem); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; }
+
+  /* ── BOUQUET SIDE ── */
+  .bouquet-side {
+    flex: 0 0 clamp(260px, 32vw, 380px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: clamp(360px, 48vw, 520px);
+    position: relative;
+  }
+
+  .bouquet-side svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── RESPONSIVE: stack vertically on small screens ── */
+  @media (max-width: 700px) {
+    .inner {
+      flex-direction: column-reverse;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .bouquet-side {
+      flex: 0 0 auto;
+      width: clamp(220px, 75vw, 320px);
+      height: clamp(300px, 55vw, 400px);
+    }
+    .text-side {
+      max-width: 100%;
+      text-align: center;
+    }
+    .text-side .quote { text-align: left; }
+    .dots { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="hero">
+  <canvas id="fw-canvas"></canvas>
+  <div class="inner">
+
+    <!-- TEXT SIDE -->
+    <div class="text-side">
+      <div class="badge">Hi po! 🌸</div>
+      <h1>Congratulations on making <em>it this far!</em></h1>
+      <p class="sub">Keep on living in the IT Era.</p>
+
+      <p class="msg">
+        So <strong>mao rato sya haha.</strong> Be observant always po and aware around things of technology as technology wraps around us and <span class="highlight">evolving every year.</span> Make sure to be observant and adapt on this as a <strong>professional one day.</strong>
+        <br/><br/>
+        <strong>Don't settle for less po, Go beyond!</strong>
+        <br/><br/>
+        That's all po and see you around.
+        <span class="sign-off">— Ocampo Out! </span>
+      </p>
+
+      <p class="quote" style="text-align: center;">The future belongs to those who adapt at all things, interact around ,and bloom.</p>
+
+      <div class="dots">
+        <div class="dot" style="background:#f9a8d4"></div>
+        <div class="dot" style="background:#86efac"></div>
+        <div class="dot" style="background:#fbbf24"></div>
+      </div>
+
+      <p class="made-by">✦ Made by Ocampo, Jevie Jan A.</p>
+    </div>
+
+    <!-- BOUQUET SIDE -->
+    <div class="bouquet-side">
+      <svg id="bouquet" viewBox="0 0 300 440" overflow="visible" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="cp"><rect x="0" y="0" width="300" height="320"/></clipPath>
+        </defs>
+
+        <!-- POT -->
+        <g id="pot">
+          <ellipse cx="150" cy="328" rx="48" ry="9" fill="#7c4a1a" opacity="0.9"/>
+          <rect x="102" y="320" width="96" height="14" rx="5" fill="#e07a3a" stroke="#c05a20" stroke-width="1.5"/>
+          <path d="M106,334 L114,396 L186,396 L194,334 Z" fill="#e88c4a" stroke="#d07030" stroke-width="1.5"/>
+          <path d="M114,340 C116,338 122,337 124,340 L120,385 C118,385 114,384 112,382 Z" fill="#f4a96a" opacity="0.35"/>
+          <rect x="116" y="394" width="68" height="12" rx="4" fill="#d07030" stroke="#b05a20" stroke-width="1"/>
+          <circle cx="146" cy="365" r="2.5" fill="#92400e"/>
+          <circle cx="156" cy="365" r="2.5" fill="#92400e"/>
+          <path d="M143,373 C146,377 158,377 161,373" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M124,348 C136,353 164,353 176,348" stroke="#fb7185" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.8"/>
+          <path d="M148,346 C144,341 137,342 139,346 C141,350 148,348 148,346 Z" fill="#fb7185"/>
+          <path d="M152,346 C156,341 163,342 161,346 C159,350 152,348 152,346 Z" fill="#fda4af"/>
+          <circle cx="150" cy="346" r="3" fill="#fecdd3"/>
+        </g>
+
+        <g id="bouquet-anim" clip-path="url(#cp)">
+          <!-- STEM 1 rose -->
+          <g id="fl1">
+            <path id="st1" d="M148,326 C142,300 108,265 76,148" stroke="#4ade80" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            <ellipse id="lf1a" cx="100" cy="228" rx="17" ry="9" fill="#4ade80" transform="rotate(-42,100,228)"/>
+            <ellipse id="lf1b" cx="88" cy="192" rx="14" ry="8" fill="#86efac" transform="rotate(-50,88,192)"/>
+            <g id="fh1" style="transform-origin:76px 130px">
+              <ellipse cx="76" cy="106" rx="12" ry="19" fill="#fb7185" opacity="0.9"/>
+              <ellipse cx="76" cy="106" rx="12" ry="19" fill="#fda4af" opacity="0.85" transform="rotate(45,76,130)"/>
+              <ellipse cx="76" cy="106" rx="12" ry="19" fill="#fb7185" opacity="0.9" transform="rotate(90,76,130)"/>
+              <ellipse cx="76" cy="106" rx="12" ry="19" fill="#fda4af" opacity="0.85" transform="rotate(135,76,130)"/>
+              <ellipse cx="76" cy="106" rx="12" ry="19" fill="#fb7185" opacity="0.9" transform="rotate(180,76,130)"/>
+              <ellipse cx="76" cy="106" rx="12" ry="19" fill="#fda4af" opacity="0.85" transform="rotate(225,76,130)"/>
+              <ellipse cx="76" cy="106" rx="12" ry="19" fill="#fb7185" opacity="0.9" transform="rotate(270,76,130)"/>
+              <ellipse cx="76" cy="106" rx="12" ry="19" fill="#fda4af" opacity="0.85" transform="rotate(315,76,130)"/>
+              <ellipse cx="76" cy="118" rx="8" ry="12" fill="#fecdd3" transform="rotate(22,76,130)"/>
+              <ellipse cx="76" cy="118" rx="8" ry="12" fill="#fda4af" transform="rotate(112,76,130)"/>
+              <ellipse cx="76" cy="118" rx="8" ry="12" fill="#fecdd3" transform="rotate(202,76,130)"/>
+              <circle cx="76" cy="130" r="10" fill="#fde68a"/>
+              <circle cx="76" cy="130" r="5" fill="#f59e0b"/>
+            </g>
+          </g>
+          <!-- STEM 2 daisy -->
+          <g id="fl2">
+            <path id="st2" d="M150,326 C146,298 128,258 112,158" stroke="#22c55e" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            <ellipse id="lf2a" cx="128" cy="230" rx="15" ry="8" fill="#86efac" transform="rotate(28,128,230)"/>
+            <ellipse id="lf2b" cx="118" cy="192" rx="14" ry="7" fill="#4ade80" transform="rotate(38,118,192)"/>
+            <g id="fh2" style="transform-origin:112px 140px">
+              <ellipse cx="112" cy="116" rx="8" ry="17" fill="#f0abfc"/>
+              <ellipse cx="112" cy="116" rx="8" ry="17" fill="#e879f9" transform="rotate(30,112,140)"/>
+              <ellipse cx="112" cy="116" rx="8" ry="17" fill="#f0abfc" transform="rotate(60,112,140)"/>
+              <ellipse cx="112" cy="116" rx="8" ry="17" fill="#e879f9" transform="rotate(90,112,140)"/>
+              <ellipse cx="112" cy="116" rx="8" ry="17" fill="#f0abfc" transform="rotate(120,112,140)"/>
+              <ellipse cx="112" cy="116" rx="8" ry="17" fill="#e879f9" transform="rotate(150,112,140)"/>
+              <ellipse cx="112" cy="116" rx="8" ry="17" fill="#f0abfc" transform="rotate(180,112,140)"/>
+              <ellipse cx="112" cy="116" rx="8" ry="17" fill="#e879f9" transform="rotate(210,112,140)"/>
+              <ellipse cx="112" cy="116" rx="8" ry="17" fill="#f0abfc" transform="rotate(240,112,140)"/>
+              <ellipse cx="112" cy="116" rx="8" ry="17" fill="#e879f9" transform="rotate(270,112,140)"/>
+              <ellipse cx="112" cy="116" rx="8" ry="17" fill="#f0abfc" transform="rotate(300,112,140)"/>
+              <ellipse cx="112" cy="116" rx="8" ry="17" fill="#e879f9" transform="rotate(330,112,140)"/>
+              <circle cx="112" cy="140" r="12" fill="#fef08a"/>
+              <circle cx="112" cy="140" r="6" fill="#facc15"/>
+            </g>
+          </g>
+          <!-- STEM 3 sunflower -->
+          <g id="fl3">
+            <path id="st3" d="M152,326 C152,295 152,240 152,128" stroke="#16a34a" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+            <ellipse id="lf3a" cx="138" cy="228" rx="16" ry="8" fill="#4ade80" transform="rotate(-26,138,228)"/>
+            <ellipse id="lf3b" cx="166" cy="248" rx="16" ry="8" fill="#86efac" transform="rotate(26,166,248)"/>
+            <ellipse id="lf3c" cx="140" cy="188" rx="14" ry="7" fill="#4ade80" transform="rotate(-22,140,188)"/>
+            <g id="fh3" style="transform-origin:152px 110px">
+              <ellipse cx="152" cy="84" rx="13" ry="23" fill="#fde68a"/>
+              <ellipse cx="152" cy="84" rx="13" ry="23" fill="#fbbf24" transform="rotate(45,152,110)"/>
+              <ellipse cx="152" cy="84" rx="13" ry="23" fill="#fde68a" transform="rotate(90,152,110)"/>
+              <ellipse cx="152" cy="84" rx="13" ry="23" fill="#fbbf24" transform="rotate(135,152,110)"/>
+              <ellipse cx="152" cy="84" rx="13" ry="23" fill="#fde68a" transform="rotate(180,152,110)"/>
+              <ellipse cx="152" cy="84" rx="13" ry="23" fill="#fbbf24" transform="rotate(225,152,110)"/>
+              <ellipse cx="152" cy="84" rx="13" ry="23" fill="#fde68a" transform="rotate(270,152,110)"/>
+              <ellipse cx="152" cy="84" rx="13" ry="23" fill="#fbbf24" transform="rotate(315,152,110)"/>
+              <circle cx="152" cy="110" r="20" fill="#92400e"/>
+              <circle cx="152" cy="110" r="12" fill="#78350f"/>
+              <circle cx="147" cy="105" r="2.2" fill="#fbbf24" opacity="0.6"/>
+              <circle cx="157" cy="105" r="2.2" fill="#fbbf24" opacity="0.6"/>
+              <circle cx="152" cy="115" r="2.2" fill="#fbbf24" opacity="0.6"/>
+              <circle cx="144" cy="113" r="1.8" fill="#fbbf24" opacity="0.5"/>
+              <circle cx="160" cy="113" r="1.8" fill="#fbbf24" opacity="0.5"/>
+            </g>
+          </g>
+          <!-- STEM 4 tulip -->
+          <g id="fl4">
+            <path id="st4" d="M152,326 C156,298 174,258 190,160" stroke="#22c55e" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            <ellipse id="lf4a" cx="174" cy="232" rx="15" ry="8" fill="#86efac" transform="rotate(-30,174,232)"/>
+            <ellipse id="lf4b" cx="183" cy="195" rx="14" ry="7" fill="#4ade80" transform="rotate(-38,183,195)"/>
+            <g id="fh4" style="transform-origin:190px 148px">
+              <path d="M190,110 C178,110 167,122 167,138 C167,154 178,165 190,167 C202,165 213,154 213,138 C213,122 202,110 190,110 Z" fill="#f9a8d4" opacity="0.9"/>
+              <path d="M190,107 C184,101 173,106 171,118 C169,130 175,143 190,148" fill="#fb7185" opacity="0.85"/>
+              <path d="M190,107 C196,101 207,106 209,118 C211,130 205,143 190,148" fill="#fda4af" opacity="0.85"/>
+              <line x1="190" y1="110" x2="190" y2="160" stroke="#fb7185" stroke-width="1.5" opacity="0.45"/>
+              <circle cx="190" cy="148" r="5" fill="#fde68a"/>
+              <circle cx="190" cy="148" r="2.5" fill="#f59e0b"/>
+            </g>
+          </g>
+          <!-- STEM 5 cherry blossom -->
+          <g id="fl5">
+            <path id="st5" d="M150,326 C158,298 204,262 224,148" stroke="#4ade80" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            <ellipse id="lf5a" cx="200" cy="228" rx="15" ry="8" fill="#4ade80" transform="rotate(40,200,228)"/>
+            <ellipse id="lf5b" cx="214" cy="190" rx="13" ry="7" fill="#86efac" transform="rotate(46,214,190)"/>
+            <g id="fh5" style="transform-origin:224px 130px">
+              <ellipse cx="224" cy="106" rx="11" ry="19" fill="#fce7f3"/>
+              <ellipse cx="224" cy="106" rx="11" ry="19" fill="#fbcfe8" transform="rotate(72,224,130)"/>
+              <ellipse cx="224" cy="106" rx="11" ry="19" fill="#fce7f3" transform="rotate(144,224,130)"/>
+              <ellipse cx="224" cy="106" rx="11" ry="19" fill="#fbcfe8" transform="rotate(216,224,130)"/>
+              <ellipse cx="224" cy="106" rx="11" ry="19" fill="#fce7f3" transform="rotate(288,224,130)"/>
+              <circle cx="224" cy="130" r="9" fill="#fff1f2"/>
+              <circle cx="224" cy="130" r="4" fill="#fda4af"/>
+              <line x1="224" y1="122" x2="224" y2="115" stroke="#fb7185" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="220" y1="124" x2="215" y2="118" stroke="#fb7185" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="228" y1="124" x2="233" y2="118" stroke="#fb7185" stroke-width="1.2" stroke-linecap="round"/>
+              <circle cx="224" cy="114" r="2.2" fill="#fbbf24"/>
+              <circle cx="214" cy="117" r="2.2" fill="#fbbf24"/>
+              <circle cx="234" cy="117" r="2.2" fill="#fbbf24"/>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── CANVAS SETUP ──
+const canvas = document.getElementById('fw-canvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width  = canvas.offsetWidth  || window.innerWidth;
+  canvas.height = canvas.offsetHeight || window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const PALETTES = [
+  ['#fb7185','#fda4af','#fecdd3','#ffe4e6'],
+  ['#d946ef','#e879f9','#f0abfc','#fae8ff'],
+  ['#f59e0b','#fbbf24','#fde68a','#fef9c3'],
+  ['#22c55e','#4ade80','#86efac','#dcfce7'],
+  ['#3b82f6','#93c5fd','#bfdbfe','#dbeafe'],
+  ['#ec4899','#f472b6','#fbcfe8','#fdf2f8'],
+  ['#a78bfa','#c4b5fd','#ddd6fe','#ede9fe'],
+  ['#f97316','#fdba74','#fed7aa','#fff7ed'],
+];
+
+const SHAPES = ['circle','star','heart','diamond','sparkle','petal'];
+
+function drawShape(x,y,shape,size,color,alpha){
+  ctx.save();
+  ctx.globalAlpha=Math.max(0,alpha);
+  ctx.fillStyle=color; ctx.strokeStyle=color;
+  ctx.translate(x,y);
+  if(shape==='circle'){ctx.beginPath();ctx.arc(0,0,size,0,Math.PI*2);ctx.fill();}
+  else if(shape==='star'){
+    ctx.beginPath();
+    for(let i=0;i<5;i++){
+      const a=(i*4*Math.PI)/5-Math.PI/2;
+      const b=(i*4*Math.PI)/5-Math.PI/2+(2*Math.PI)/10;
+      i===0?ctx.moveTo(Math.cos(a)*size,Math.sin(a)*size):ctx.lineTo(Math.cos(a)*size,Math.sin(a)*size);
+      ctx.lineTo(Math.cos(b)*size*0.42,Math.sin(b)*size*0.42);
+    }
+    ctx.closePath();ctx.fill();
+  } else if(shape==='heart'){
+    const s=size*0.85;
+    ctx.beginPath();ctx.moveTo(0,s*0.3);
+    ctx.bezierCurveTo(-s,-s*0.3,-s*1.4,s*0.8,0,s*1.3);
+    ctx.bezierCurveTo(s*1.4,s*0.8,s,-s*0.3,0,s*0.3);
+    ctx.fill();
+  } else if(shape==='diamond'){
+    ctx.beginPath();ctx.moveTo(0,-size);ctx.lineTo(size*0.55,0);
+    ctx.lineTo(0,size);ctx.lineTo(-size*0.55,0);ctx.closePath();ctx.fill();
+  } else if(shape==='sparkle'){
+    ctx.lineWidth=size*0.32;ctx.lineCap='round';
+    for(let i=0;i<4;i++){const a=(i*Math.PI)/2;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(a)*size*1.3,Math.sin(a)*size*1.3);ctx.stroke();}
+    ctx.beginPath();ctx.arc(0,0,size*0.22,0,Math.PI*2);ctx.fill();
+  } else if(shape==='petal'){
+    ctx.beginPath();ctx.ellipse(0,-size*0.5,size*0.4,size*0.85,0,0,Math.PI*2);ctx.fill();
+  }
+  ctx.restore();
+}
+
+class Particle{
+  constructor(x,y,pal){
+    this.x=x;this.y=y;
+    const angle=Math.random()*Math.PI*2;
+    const spd=1.0+Math.random()*3.8;
+    this.vx=Math.cos(angle)*spd;this.vy=Math.sin(angle)*spd-1.2;
+    this.gravity=0.055+Math.random()*0.04;
+    this.size=2.5+Math.random()*4.5;
+    this.color=pal[Math.floor(Math.random()*pal.length)];
+    this.shape=SHAPES[Math.floor(Math.random()*SHAPES.length)];
+    this.life=0.9+Math.random()*0.1;this.decay=0.011+Math.random()*0.016;
+    this.rot=Math.random()*Math.PI*2;this.rotSpd=(Math.random()-0.5)*0.13;
+  }
+  step(){this.x+=this.vx;this.y+=this.vy;this.vy+=this.gravity;this.vx*=0.985;this.life-=this.decay;this.rot+=this.rotSpd;}
+  draw(){ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.rot);drawShape(0,0,this.shape,this.size,this.color,this.life*0.82);ctx.restore();}
+}
+
+class Glitter{
+  constructor(w,h){this.reset(w,h,true);}
+  reset(w,h,init=false){
+    const pal=PALETTES[Math.floor(Math.random()*PALETTES.length)];
+    this.x=Math.random()*w;this.y=init?Math.random()*h:-10;
+    this.vx=(Math.random()-0.5)*0.4;this.vy=0.3+Math.random()*0.7;
+    this.size=1.5+Math.random()*3;this.color=pal[Math.floor(Math.random()*pal.length)];
+    this.shape=Math.random()<0.5?'sparkle':'star';
+    this.life=0.5+Math.random()*0.5;this.decay=0.002+Math.random()*0.003;
+    this.rot=Math.random()*Math.PI*2;this.rotSpd=(Math.random()-0.5)*0.04;
+    this.w=w;this.h=h;
+  }
+  step(){this.x+=this.vx;this.y+=this.vy;this.rot+=this.rotSpd;this.life-=this.decay;if(this.y>this.h+10||this.life<=0)this.reset(this.w,this.h);}
+  draw(){ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.rot);drawShape(0,0,this.shape,this.size,this.color,this.life*0.55);ctx.restore();}
+}
+
+class Ring{
+  constructor(x,y,pal){this.x=x;this.y=y;this.pal=pal;this.r=0;this.maxR=22+Math.random()*18;this.life=1;this.count=5+Math.floor(Math.random()*5);}
+  step(){this.r+=2.6;this.life-=0.045;}
+  draw(){
+    if(this.life<=0)return;
+    for(let i=0;i<this.count;i++){
+      const a=(i/this.count)*Math.PI*2;
+      drawShape(this.x+Math.cos(a)*this.r,this.y+Math.sin(a)*this.r,'circle',3-this.r/this.maxR*1.5,this.pal[i%this.pal.length],this.life*0.7);
+    }
+  }
+}
+
+class Rocket{
+  constructor(w,h){
+    this.w=w; this.h=h;
+    // always launch from the bottom ground — spread across full width
+    this.x = w * 0.05 + Math.random() * w * 0.90;
+    this.y = h + 8;
+    // target: upper 55% of screen, full width coverage
+    this.tx = w * 0.03 + Math.random() * w * 0.94;
+    this.ty = h * 0.05 + Math.random() * h * 0.50;
+    this.pal = PALETTES[Math.floor(Math.random()*PALETTES.length)];
+    // faster rockets so they feel snappy from ground
+    this.spd = 0.038 + Math.random() * 0.030;
+    this.prog=0; this.done=false; this.exploded=false; this.trail=[];
+  }
+  step(){
+    this.prog = Math.min(1, this.prog + this.spd);
+    const cx = this.x + (this.tx - this.x) * this.prog;
+    const cy = this.y + (this.ty - this.y) * this.prog;
+    this.trail.push({x:cx, y:cy, a:0.85});
+    this.trail.forEach(t => t.a -= 0.048);
+    this.trail = this.trail.filter(t => t.a > 0);
+    if(this.prog >= 1){ this.done = true; }
+    return {x:cx, y:cy};
+  }
+  draw(){
+    // draw bright rocket head + trail
+    const last = this.trail[this.trail.length-1];
+    if(last){
+      ctx.save(); ctx.globalAlpha=0.95; ctx.fillStyle='#ffffff';
+      ctx.beginPath(); ctx.arc(last.x, last.y, 2.8, 0, Math.PI*2); ctx.fill();
+      ctx.restore();
+    }
+    this.trail.forEach((t,i) => {
+      ctx.save();
+      ctx.globalAlpha = t.a * 0.7;
+      ctx.fillStyle = this.pal[i % this.pal.length];
+      ctx.beginPath(); ctx.arc(t.x, t.y, 2.5 - i*0.04, 0, Math.PI*2); ctx.fill();
+      ctx.restore();
+    });
+  }
+}
+
+let particles=[],rockets=[],rings=[],glitters=[];
+
+function initGlitters(){
+  const w=canvas.width, h=canvas.height;
+  for(let i=0;i<80;i++) glitters.push(new Glitter(w,h));
+}
+initGlitters();
+window.addEventListener('resize',()=>{resize(); glitters=[]; initGlitters();});
+
+function spawnRocket(){
+  rockets.push(new Rocket(canvas.width, canvas.height));
+}
+
+// ── GROUND LAUNCH SALVO — fires a wave every 3 seconds, rockets stagger within the wave
+function launchSalvo(){
+  // 6–9 rockets per wave, evenly spread across the bottom with slight random offset
+  const count = 6 + Math.floor(Math.random()*4);
+  for(let i=0; i<count; i++){
+    setTimeout(spawnRocket, i * (180 + Math.random()*120));
+  }
+}
+
+launchSalvo(); // fire immediately on load
+setInterval(launchSalvo, 3000); // then every 3 seconds exactly
+
+function fwLoop(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  glitters.forEach(g=>{g.step();g.draw();});
+  rockets.forEach(r=>{
+    r.step();r.draw();
+    if(r.done&&!r.exploded){
+      r.exploded=true;
+      const cnt=45+Math.floor(Math.random()*30);
+      for(let i=0;i<cnt;i++) particles.push(new Particle(r.tx,r.ty,r.pal));
+      for(let i=0;i<5;i++){
+        setTimeout(()=>{rings.push(new Ring(r.tx+(Math.random()-0.5)*36,r.ty+(Math.random()-0.5)*26,r.pal));},i*100);
+      }
+    }
+  });
+  rockets=rockets.filter(r=>!r.done||r.trail.length>0);
+  rings.forEach(r=>{r.step();r.draw();});
+  rings=rings.filter(r=>r.life>0);
+  particles.forEach(p=>{p.step();p.draw();});
+  particles=particles.filter(p=>p.life>0);
+  requestAnimationFrame(fwLoop);
+}
+fwLoop();
+
+// ── BOUQUET LOOP ──
+const CYCLE=5000,GROW=2200,HOLD=1400,SHRINK=1000;
+const stemIds=['st1','st2','st3','st4','st5'];
+const flowerIds=['fh1','fh2','fh3','fh4','fh5'];
+const leafIds=[['lf1a','lf1b'],['lf2a','lf2b'],['lf3a','lf3b','lf3c'],['lf4a','lf4b'],['lf5a','lf5b']];
+const stemLengths=[230,200,200,200,220];
+const staggerGrow=[0.05,0.15,0.0,0.2,0.1];
+const staggerShrink=[0.1,0.0,0.2,0.05,0.15];
+
+function easeOutBack(t){const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2);}
+function easeInBack(t){const c1=1.70158,c3=c1+1;return c3*t*t*t-c1*t*t;}
+function easeInOutCubic(t){return t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+
+let startTime=null;
+function bouquetTick(now){
+  if(!startTime) startTime=now;
+  const elapsed=(now-startTime)%CYCLE;
+  const isGrowing=elapsed<GROW;
+  const isHolding=elapsed>=GROW&&elapsed<GROW+HOLD;
+  const isShrinking=elapsed>=GROW+HOLD&&elapsed<GROW+HOLD+SHRINK;
+
+  stemIds.forEach((sid,i)=>{
+    const stem=document.getElementById(sid);
+    const flower=document.getElementById(flowerIds[i]);
+    const leaves=leafIds[i].map(id=>document.getElementById(id));
+    const sLen=stemLengths[i];
+    const sg=staggerGrow[i],ss=staggerShrink[i];
+    let sp=0,fs=0,ls=0;
+
+    if(isGrowing){
+      const t=elapsed/GROW;
+      const st=clamp((t-sg)/(1-sg),0,1);
+      sp=easeInOutCubic(st);
+      fs=easeOutBack(clamp((st-0.7)/0.3,0,1));
+      ls=easeOutBack(clamp((st-0.4)/0.4,0,1));
+    } else if(isHolding){
+      sp=1;fs=1;ls=1;
+    } else if(isShrinking){
+      const t=(elapsed-GROW-HOLD)/SHRINK;
+      const rt=clamp((t-ss)/(1-ss),0,1);
+      fs=Math.max(0,1-easeInBack(clamp(rt*2.5,0,1)));
+      ls=Math.max(0,1-easeInBack(clamp((rt-0.1)*2,0,1)));
+      sp=Math.max(0,1-easeInOutCubic(clamp((rt-0.2)*1.4,0,1)));
+    }
+
+    if(stem){stem.style.strokeDasharray=sLen;stem.style.strokeDashoffset=sLen*(1-sp);}
+    if(flower) flower.style.transform=`scale(${Math.max(0,fs)})`;
+    leaves.forEach(lf=>{
+      if(lf){lf.style.transformBox='fill-box';lf.style.transformOrigin='center';lf.style.transform=`scale(${Math.max(0,ls)})`;}
+    });
+  });
+  requestAnimationFrame(bouquetTick);
+}
+requestAnimationFrame(bouquetTick);
+</script>
+</body>
+</html>
